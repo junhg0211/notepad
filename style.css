@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
+
 @media (prefers-color-scheme: dark) {
     textarea {
       background-color: #19191E;
@@ -20,7 +22,7 @@ body {
 textarea {
     width: 100%;
     height: 100%;
-    font-family: sans-serif;
+    font-family: "Pretendard Variable", sans-serif;
     margin: 0;
     border: 0;
     padding: 0;
