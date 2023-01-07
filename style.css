@@ -28,4 +28,5 @@ textarea {
     outline-color: #0000;
     padding: 1rem;
     font-size: 64px;
+    resize: none;
 }
