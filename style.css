@@ -25,6 +25,7 @@ textarea {
     font-family: "Pretendard Variable", sans-serif;
     margin: 0;
     border: 0;
+    outline-color: #0000;
     padding: 0;
     font-size: 64px;
 }
