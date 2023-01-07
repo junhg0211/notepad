@@ -2,7 +2,8 @@ let textarea;
 
 function setCookie(key, value) {
     let expire = new Date(new Date().getTime() + 24*60*60*1000);
-    document.cookie = `${key}=${btoa(value)}; expires=${expire}; path=/`;
+    value = encodeURIComponent(value);
+    document.cookie = `${key}=${value}; expires=${expire}; path=/`;
 }
 
 function onload() {
@@ -12,7 +13,7 @@ function onload() {
         let [key, value] = cookie.split('=');
 
         if (key === 'content') {
-            textarea.value = atob(value);
+            textarea.value = decodeURIComponent(value);
         }
     });
 
