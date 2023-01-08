@@ -29,10 +29,10 @@ function onload() {
     document.addEventListener('keydown', e => {
         let compose = e.metaKey || e.ctrlKey;
 
-        if (compose && e.key === 'i') {
+        if (compose && e.code === 'KeyI') {
             textarea.style.fontStyle = textarea.style.fontStyle ? '' : 'italic';
             setCookie('italic', textarea.style.fontStyle);
-        } else if (compose && e.key === 'b') {
+        } else if (compose && e.code === 'KeyB') {
             textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
             setCookie('bold', textarea.style.fontWeight);
         }
