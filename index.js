@@ -12,8 +12,13 @@ function onload() {
     document.cookie.split('; ').forEach(cookie => {
         let [key, value] = cookie.split('=');
 
+        value = decodeURIComponent(value);
         if (key === 'content') {
-            textarea.value = decodeURIComponent(value);
+            textarea.value = value;
+        } else if (key === 'italic') {
+            textarea.style.fontStyle = value;
+        } else if (key === 'bold') {
+            textarea.style.fontWeight = value;
         }
     });
 
@@ -26,8 +31,10 @@ function onload() {
 
         if (compose && e.key === 'i') {
             textarea.style.fontStyle = textarea.style.fontStyle ? '' : 'italic';
+            setCookie('italic', textarea.style.fontStyle);
         } else if (compose && e.key === 'b') {
             textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
+            setCookie('bold', textarea.style.fontWeight);
         }
     });
 }
