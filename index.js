@@ -20,4 +20,14 @@ function onload() {
     textarea.addEventListener('input', e => {
         setCookie('content', e.target.value);
     });
+
+    document.addEventListener('keydown', e => {
+        let compose = e.metaKey || e.ctrlKey;
+
+        if (compose && e.key === 'i') {
+            textarea.style.fontStyle = textarea.style.fontStyle ? '' : 'italic';
+        } else if (compose && e.key === 'b') {
+            textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
+        }
+    });
 }
