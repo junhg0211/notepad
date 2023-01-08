@@ -1,6 +1,10 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 
 @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #19191E;
+    }
+
     textarea {
       background-color: #19191E;
       color: #F7F7F9;
@@ -8,6 +12,10 @@
 }
 
 @media (prefers-color-scheme: light){
+    body {
+      background-color: #F7F7F9;
+    }
+
     textarea {
         background-color: #F7F7F9;
         color: #19191E;
