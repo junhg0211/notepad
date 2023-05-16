@@ -19,6 +19,8 @@ function onload() {
             textarea.style.fontStyle = value;
         } else if (key === 'bold') {
             textarea.style.fontWeight = value;
+        } else if (key === 'underline') {
+            textarea.style.textDecoration = value;
         }
     });
 
@@ -35,6 +37,9 @@ function onload() {
         } else if (compose && e.code === 'KeyB') {
             textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
             setCookie('bold', textarea.style.fontWeight);
+        } else if (compose && e.code === 'KeyU') {
+            textarea.style.textDecoration = textarea.style.textDecoration ? '' : 'underline';
+            setCookie('underline', textarea.style.textDecoration);
         }
     });
 }
