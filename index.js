@@ -47,19 +47,19 @@ function onload() {
             setCookie('underline', textarea.style.textDecoration);
         }
 
-        if (compose && e.code === 'KeyH') {
+        if (compose && e.code === 'KeyH' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'left';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyJ') {
+        } else if (compose && e.code === 'KeyJ' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'justify';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyK') {
+        } else if (compose && e.code === 'KeyK' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'center';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyL') {
+        } else if (compose && e.code === 'KeyL' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'right';
             setCookie('align', textarea.style.textAlign);
