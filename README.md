@@ -12,3 +12,9 @@
 
 * `Compose` + `B`: 토글 볼드
 * `Compose` + `I`: 토글 이탤릭체
+* `Compose` + `U`: 밑줄
+
+* `Compose` + `Shift` + `H`: 왼쪽 정렬
+* `Compose` + `Shift` + `J`: 좌우 정렬
+* `Compose` + `Shift` + `K`: 왼쪽 정렬
+* `Compose` + `Shift` + `L`: 왼쪽 정렬
