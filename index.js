@@ -38,6 +38,7 @@ function onload() {
             textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
             setCookie('bold', textarea.style.fontWeight);
         } else if (compose && e.code === 'KeyU') {
+            e.preventDefault();
             textarea.style.textDecoration = textarea.style.textDecoration ? '' : 'underline';
             setCookie('underline', textarea.style.textDecoration);
         }
