@@ -18,3 +18,5 @@
 * `Compose` + `Shift` + `J`: 좌우 정렬
 * `Compose` + `Shift` + `K`: 왼쪽 정렬
 * `Compose` + `Shift` + `L`: 왼쪽 정렬
+
+* `Compose` + `Shift` + `S`: 폰트 변경
