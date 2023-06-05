@@ -36,6 +36,13 @@ function onload() {
     document.addEventListener('keydown', e => {
         let compose = e.metaKey || e.ctrlKey;
 
+        // insert tab if tag is pressed
+        if (e.code === 'Tab') {
+            e.preventDefault();
+            textarea.value += '\t';
+            return;
+        }
+
         // toggle italic
         if (compose && e.code === 'KeyI') {
             e.preventDefault();
