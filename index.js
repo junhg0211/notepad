@@ -23,6 +23,9 @@ function onload() {
             textarea.style.textDecoration = value;
         } else if (key === 'align') {
             textarea.style.textAlign = value;
+        } else if (key === 'font') {
+            textarea.classList.remove('sans-serif');
+            textarea.classList.add(value);
         }
     });
 
@@ -33,36 +36,77 @@ function onload() {
     document.addEventListener('keydown', e => {
         let compose = e.metaKey || e.ctrlKey;
 
+        // toggle italic
         if (compose && e.code === 'KeyI') {
             e.preventDefault();
             textarea.style.fontStyle = textarea.style.fontStyle ? '' : 'italic';
             setCookie('italic', textarea.style.fontStyle);
-        } else if (compose && e.code === 'KeyB') {
+            return;
+        }
+        // toggle bold
+        if (compose && e.code === 'KeyB') {
             e.preventDefault();
             textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
             setCookie('bold', textarea.style.fontWeight);
-        } else if (compose && e.code === 'KeyU') {
+            return;
+        }
+        // toggle underline
+        if (compose && e.code === 'KeyU') {
             e.preventDefault();
             textarea.style.textDecoration = textarea.style.textDecoration ? '' : 'underline';
             setCookie('underline', textarea.style.textDecoration);
+            return;
         }
 
+        // align left
         if (compose && e.code === 'KeyH' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'left';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyJ' && e.shiftKey) {
+            return;
+        }
+        // align justify
+        if (compose && e.code === 'KeyJ' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'justify';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyK' && e.shiftKey) {
+            return;
+        }
+        // align center
+        if (compose && e.code === 'KeyK' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'center';
             setCookie('align', textarea.style.textAlign);
-        } else if (compose && e.code === 'KeyL' && e.shiftKey) {
+            return;
+        }
+        // align right
+        if (compose && e.code === 'KeyL' && e.shiftKey) {
             e.preventDefault();
             textarea.style.textAlign = 'right';
             setCookie('align', textarea.style.textAlign);
+            return;
+        }
+
+        console.log(e.code);
+        // change font family
+        if (compose && e.code === 'KeyS' && e.shiftKey) {
+            e.preventDefault();
+            let font;
+
+            if (textarea.classList.contains('sans-serif')) {
+                textarea.classList.remove('sans-serif');
+                font = 'serif';
+            } else if (textarea.classList.contains('serif')) {
+                textarea.classList.remove('serif');
+                font = 'monospaced';
+            } else {
+                textarea.classList.remove('monospaced');
+                font = 'sans-serif';
+            }
+
+            textarea.classList.add(font);
+            setCookie('font', font);
         }
     });
+
 }

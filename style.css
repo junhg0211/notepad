@@ -30,11 +30,22 @@ body {
 textarea {
     width: calc(100% - 2rem);
     height: calc(100% - 2rem);
-    font-family: "Pretendard Variable", sans-serif;
     margin: 0;
     border: 0;
     outline-color: #0000;
     padding: 1rem;
     font-size: 64px;
     resize: none;
+}
+
+.sans-serif {
+    font-family: "Pretendard Variable", sans-serif;
+}
+
+.serif {
+    font-family: "Times New Roman", "Georgia", "Noto Serif", serif;
+}
+
+.monospaced {
+    font-family: "Fira Code", "D2Coding", monospace;
 }
