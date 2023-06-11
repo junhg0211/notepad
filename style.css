@@ -43,7 +43,7 @@ textarea {
 }
 
 .serif {
-    font-family: "Times New Roman", "Georgia", "Noto Serif", serif;
+    font-family: "Times New Roman", "Georgia", "Noto Serif", "Noto Serif JP", "Noto Serif KR", serif;
 }
 
 .monospaced {
