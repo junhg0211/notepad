@@ -6,6 +6,11 @@ function setCookie(key, value) {
     document.cookie = `${key}=${value}; expires=${expire}; path=/`;
 }
 
+function typeInTextarea(newText, el = document.activeElement) {
+    const [start, end] = [el.selectionStart, el.selectionEnd];
+    el.setRangeText(newText, start, end, 'end');
+}
+
 function onload() {
     textarea = document.querySelector('textarea');
 
@@ -39,7 +44,7 @@ function onload() {
         // insert tab if tag is pressed
         if (e.code === 'Tab') {
             e.preventDefault();
-            textarea.value += '\t';
+            typeInTextarea('\t');
             return;
         }
 
@@ -115,5 +120,4 @@ function onload() {
             setCookie('font', font);
         }
     });
-
 }
