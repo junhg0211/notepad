@@ -121,7 +121,7 @@ function onload() {
         }
 
         // Save as .txt file
-        if (compose && e.code === 'KeyS') {
+        if (compose && e.code === 'KeyS' && !e.shiftKey) {
             e.preventDefault();
 
             const text = textarea.value;
