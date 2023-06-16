@@ -128,9 +128,9 @@ function onload() {
             const link = document.createElement('a');
 
             link.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
-            link.download = 'Notepad.txt';
+            link.download = new Date().getTime() + '.txt';
             link.click();
-        
+
             URL.revokeObjectURL(url);
         }
 
