@@ -11,6 +11,78 @@ function typeInTextarea(newText, el = document.activeElement) {
     el.setRangeText(newText, start, end, 'end');
 }
 
+function unsetItalic() {
+    textarea.style.fontStyle = '';
+    setCookie('italic', textarea.style.fontStyle);
+}
+
+function setItalic() {
+    textarea.style.fontStyle = 'italic';
+    setCookie('italic', textarea.style.fontStyle);
+}
+
+function unsetBold() {
+    textarea.style.fontWeight = '';
+    setCookie('bold', textarea.style.fontWeight);
+}
+
+function setBold() {
+    textarea.style.fontWeight = 'bold';
+    setCookie('bold', textarea.style.fontWeight);
+}
+
+function unsetUnderline() {
+    textarea.style.textDecoration = '';
+    setCookie('underline', textarea.style.textDecoration);
+}
+
+function setUnderline() {
+    textarea.style.textDecoration = 'underline';
+    setCookie('underline', textarea.style.textDecoration);
+}
+
+function alignLeft() {
+    textarea.style.textAlign = 'left';
+    setCookie('align', textarea.style.textAlign);
+}
+
+function alignJustify() {
+    textarea.style.textAlign = 'justify';
+    setCookie('align', textarea.style.textAlign);
+}
+
+function alignCenter() {
+    textarea.style.textAlign = 'center';
+    setCookie('align', textarea.style.textAlign);
+}
+
+function alignRight() {
+    textarea.style.textAlign = 'right';
+    setCookie('align', textarea.style.textAlign);
+}
+
+function setFont(font) {
+    textarea.classList.remove('sans-serif');
+    textarea.classList.remove('serif');
+    textarea.classList.remove('monospaced');
+
+    textarea.classList.add(font);
+    setCookie('font', font);
+
+}
+
+function saveTextFile() {
+    const text = textarea.value;
+    const link = document.createElement('a');
+
+    link.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
+    link.download = new Date().getTime() + '.txt';
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+}
+
+
 function onload() {
     textarea = document.querySelector('textarea');
 
@@ -51,87 +123,76 @@ function onload() {
         // toggle italic
         if (compose && e.code === 'KeyI') {
             e.preventDefault();
-            textarea.style.fontStyle = textarea.style.fontStyle ? '' : 'italic';
-            setCookie('italic', textarea.style.fontStyle);
+
+            if (textarea.style.fontStyle) unsetItalic();
+            else setItalic();
+
             return;
         }
         // toggle bold
         if (compose && e.code === 'KeyB') {
             e.preventDefault();
-            textarea.style.fontWeight = textarea.style.fontWeight ? '' : 'bold';
-            setCookie('bold', textarea.style.fontWeight);
+
+            if (textarea.style.fontWeight) unsetBold();
+            else setBold();
+
             return;
         }
         // toggle underline
         if (compose && e.code === 'KeyU') {
             e.preventDefault();
-            textarea.style.textDecoration = textarea.style.textDecoration ? '' : 'underline';
-            setCookie('underline', textarea.style.textDecoration);
+
+            if (textarea.style.textDecoration) unsetUnderline();
+            else setUnderline();
+
             return;
         }
 
         // align left
         if (compose && e.code === 'KeyH' && e.shiftKey) {
             e.preventDefault();
-            textarea.style.textAlign = 'left';
-            setCookie('align', textarea.style.textAlign);
+            alignLeft();
             return;
         }
         // align justify
         if (compose && e.code === 'KeyJ' && e.shiftKey) {
             e.preventDefault();
-            textarea.style.textAlign = 'justify';
-            setCookie('align', textarea.style.textAlign);
+            alignJustify();
             return;
         }
         // align center
         if (compose && e.code === 'KeyK' && e.shiftKey) {
             e.preventDefault();
-            textarea.style.textAlign = 'center';
-            setCookie('align', textarea.style.textAlign);
+            alignCenter();
             return;
         }
         // align right
         if (compose && e.code === 'KeyL' && e.shiftKey) {
             e.preventDefault();
-            textarea.style.textAlign = 'right';
-            setCookie('align', textarea.style.textAlign);
+            alignRight();
             return;
         }
 
-        console.log(e.code);
         // change font family
         if (compose && e.code === 'KeyS' && e.shiftKey) {
             e.preventDefault();
-            let font;
 
             if (textarea.classList.contains('sans-serif')) {
-                textarea.classList.remove('sans-serif');
-                font = 'serif';
+                setFont('serif');
             } else if (textarea.classList.contains('serif')) {
-                textarea.classList.remove('serif');
-                font = 'monospaced';
+                setFont('monospaced');
             } else {
-                textarea.classList.remove('monospaced');
-                font = 'sans-serif';
+                setFont('sans-serif');
             }
 
-            textarea.classList.add(font);
-            setCookie('font', font);
+            return;
         }
 
         // Save as .txt file
         if (compose && e.code === 'KeyS' && !e.shiftKey) {
             e.preventDefault();
 
-            const text = textarea.value;
-            const link = document.createElement('a');
-
-            link.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
-            link.download = new Date().getTime() + '.txt';
-            link.click();
-
-            URL.revokeObjectURL(url);
+            saveTextFile();
         }
 
     });
