@@ -82,6 +82,24 @@ function saveTextFile() {
     URL.revokeObjectURL(link.href);
 }
 
+const commands = [
+    {keyword: 'bold', command: setBold},
+    {keyword: 'unbold', command: unsetBold},
+    {keyword: 'italic', command: setItalic},
+    {keyword: 'unitalic', command: unsetItalic},
+    {keyword: 'underline', command: setUnderline},
+    {keyword: 'ununderline', command: unsetUnderline},
+    {keyword: 'left', command: alignLeft},
+    {keyword: 'justify', command: alignJustify},
+    {keyword: 'center', command: alignCenter},
+    {keyword: 'right', command: alignRight},
+    {keyword: 'serif', command: () => setFont('serif')},
+    {keyword: 'sans', command: () => setFont('sans-serif')},
+    {keyword: 'mono', command: () => setFont('monospaced')},
+    {keyword: 'save', command: saveTextFile},
+    {keyword: 'clear', command: () => textarea.value = ''},
+];
+
 
 function onload() {
     textarea = document.querySelector('textarea');
@@ -109,6 +127,16 @@ function onload() {
     textarea.addEventListener('input', e => {
         setCookie('content', e.target.value);
     });
+
+    document.addEventListener('keyup', () => {
+        // check if command is inserted
+        commands.forEach(command => {
+            if (textarea.value.endsWith(`/${command.keyword}`)) {
+                command.command();
+                textarea.value = textarea.value.slice(0, -command.keyword.length - 1);
+            }
+        });
+    })
 
     document.addEventListener('keydown', e => {
         let compose = e.metaKey || e.ctrlKey;
