@@ -13,7 +13,7 @@ function getJSON(url, callback) {
     xhr.send();
 };
 
-const EMOJI_MAP_JSON = "/emoji_map.json";
+const EMOJI_MAP_JSON = "./emoji_map.json";
 
 let emojiMap;
 getJSON(EMOJI_MAP_JSON, (err, data) => {
