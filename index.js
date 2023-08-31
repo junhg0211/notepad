@@ -82,6 +82,19 @@ function saveTextFile() {
     URL.revokeObjectURL(link.href);
 }
 
+function setColorScheme(scheme) {
+    document.body.classList.remove(scheme === 'light' ? 'dark' : 'light');
+    document.body.classList.add(scheme === 'light' ? 'light' : 'dark');
+}
+
+function toggleColorScheme() {
+    if (document.body.classList.contains('light')) {
+        setColorScheme('dark');
+    } else {
+        setColorScheme('light');
+    }
+}
+
 const commands = [
     {keyword: 'bold', command: setBold},
     {keyword: 'unbold', command: unsetBold},
@@ -98,6 +111,9 @@ const commands = [
     {keyword: 'mono', command: () => setFont('monospaced')},
     {keyword: 'save', command: saveTextFile},
     {keyword: 'clear', command: () => textarea.value = ''},
+    {keyword: 'color', command: toggleColorScheme},
+    {keyword: 'dark', command: () => setColorScheme('dark')},
+    {keyword: 'light', command: () => setColorScheme('light')},
 ];
 
 
@@ -139,6 +155,7 @@ function onload() {
     })
 
     document.addEventListener('keydown', e => {
+        console.log(e);
         let compose = e.metaKey || e.ctrlKey;
 
         // insert tab if tag is pressed
@@ -221,7 +238,17 @@ function onload() {
             e.preventDefault();
 
             saveTextFile();
+
+            return;
         }
 
+        // change color scheme
+        if (compose && e.code === 'KeyP') {
+            e.preventDefault();
+
+            toggleColorScheme();
+
+            return;
+        }
     });
 }

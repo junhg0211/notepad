@@ -1,30 +1,41 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 
+html {
+    --dark-background-color: #19191e;
+    --dark-color: #f7f7f9;
+
+    --light-background-color: #f7f7f9;
+    --light-color: #19191e;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
-      background-color: #19191E;
-    }
-
-    textarea {
-      background-color: #19191E;
-      color: #F7F7F9;
+        --background-color: var(--dark-background-color);
+        --color: var(--dark-color);
     }
 }
 
 @media (prefers-color-scheme: light){
     body {
-      background-color: #F7F7F9;
+        --background-color: var(--light-background-color);
+        --color: var(--light-color);
     }
+}
 
-    textarea {
-        background-color: #F7F7F9;
-        color: #19191E;
-    }
+.dark {
+    --background-color: var(--dark-background-color);
+    --color: var(--dark-color);
+}
+
+.light {
+    --background-color: var(--light-background-color);
+    --color: var(--light-color);
 }
 
 body {
     margin: 0;
     height: 100vh;
+    background-color: var(--background-color);
 }
 
 textarea {
@@ -36,6 +47,8 @@ textarea {
     padding: 1rem;
     font-size: 64px;
     resize: none;
+    background-color: var(--background-color);
+    color: var(--color);
 }
 
 .sans-serif {
