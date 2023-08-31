@@ -150,11 +150,13 @@ const commands = [
 
 let isDarkMode = false;
 
+function updateIsDarkMode() {
+    isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
 function onload() {
     // --- color scheme things
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        isDarkMode = true;
-    }
+    updateIsDarkMode();
 
     // --- textarea things
     textarea = document.querySelector('textarea');
@@ -305,5 +307,10 @@ function onload() {
 
             return;
         }
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        updateIsDarkMode();
+        console.log("color scheme changed");
     });
 }
