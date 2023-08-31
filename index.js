@@ -83,16 +83,14 @@ function saveTextFile() {
 }
 
 function setColorScheme(scheme) {
+    if (!scheme) {
+        document.body.classList.remove('dark');
+        document.body.classList.remove('light');
+        return;
+    }
+
     document.body.classList.remove(scheme === 'light' ? 'dark' : 'light');
     document.body.classList.add(scheme === 'light' ? 'light' : 'dark');
-}
-
-function toggleColorScheme() {
-    if (document.body.classList.contains('light')) {
-        setColorScheme('dark');
-    } else {
-        setColorScheme('light');
-    }
 }
 
 function emojiCommand() {
@@ -145,13 +143,20 @@ const commands = [
     {keyword: 'mono', command: () => setFont('monospaced')},
     {keyword: 'save', command: saveTextFile},
     {keyword: 'clear', command: () => textarea.value = ''},
-    {keyword: 'color', command: toggleColorScheme},
     {keyword: 'dark', command: () => setColorScheme('dark')},
     {keyword: 'light', command: () => setColorScheme('light')},
     {keyword: 'emoji', command: emojiCommand},
 ];
 
+let isDarkMode = false;
+
 function onload() {
+    // --- color scheme things
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        isDarkMode = true;
+    }
+
+    // --- textarea things
     textarea = document.querySelector('textarea');
 
     document.cookie.split('; ').forEach(cookie => {
@@ -178,7 +183,9 @@ function onload() {
         setCookie('content', e.target.value);
     });
 
-    document.addEventListener('keyup', () => {
+    document.addEventListener('keyup', e => {
+        let compose = e.metaKey || e.ctrlKey;
+
         // check if command is inserted
         commands.forEach(command => {
             if (textarea.value.endsWith(`/${command.keyword}`)) {
@@ -186,6 +193,12 @@ function onload() {
                 command.command();
             }
         });
+
+        if (compose && e.code === 'KeyP') {
+            e.preventDefault();
+
+            setColorScheme();
+        }
     })
 
     document.addEventListener('keydown', e => {
@@ -279,7 +292,7 @@ function onload() {
         if (compose && e.code === 'KeyP') {
             e.preventDefault();
 
-            toggleColorScheme();
+            setColorScheme(isDarkMode ? 'light' : 'dark');
 
             return;
         }
