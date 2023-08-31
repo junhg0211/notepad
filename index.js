@@ -95,6 +95,40 @@ function toggleColorScheme() {
     }
 }
 
+function emojiCommand() {
+    let content = textarea.value;
+
+    // find the emoji string provided
+    let lastSpaceIndex = -1;
+    for (let i = content.length - 1; i >= 0; i--) {
+        if (content[i] === ' ') {
+            lastSpaceIndex = i;
+            break;
+        }
+    }
+
+    let emojiString = content.substring(lastSpaceIndex + 1, content.length);
+
+    // adding emoji
+    let emoji = emojiMap[emojiString];
+    // find emoji is emoji is not found
+    if (emoji === undefined) {
+        Object.keys(emojiMap).forEach(key => {
+            if (emoji !== undefined) return;
+
+            if (key.indexOf(emojiString) !== -1) {
+                emoji = emojiMap[key];
+            }
+        });
+    }
+    // if after that emoji is not found, just paste nothing
+    if (emoji === undefined) {
+        emoji = '';
+    }
+
+    textarea.value = textarea.value.substring(0, lastSpaceIndex + 1) + emoji;
+}
+
 const commands = [
     {keyword: 'bold', command: setBold},
     {keyword: 'unbold', command: unsetBold},
@@ -114,8 +148,8 @@ const commands = [
     {keyword: 'color', command: toggleColorScheme},
     {keyword: 'dark', command: () => setColorScheme('dark')},
     {keyword: 'light', command: () => setColorScheme('light')},
+    {keyword: 'emoji', command: emojiCommand},
 ];
-
 
 function onload() {
     textarea = document.querySelector('textarea');
@@ -148,8 +182,8 @@ function onload() {
         // check if command is inserted
         commands.forEach(command => {
             if (textarea.value.endsWith(`/${command.keyword}`)) {
-                command.command();
                 textarea.value = textarea.value.slice(0, -command.keyword.length - 1);
+                command.command();
             }
         });
     })
@@ -246,6 +280,15 @@ function onload() {
             e.preventDefault();
 
             toggleColorScheme();
+
+            return;
+        }
+
+        // convert to emoji
+        if (compose && e.code === 'KeyE') {
+            e.preventDefault();
+
+            emojiCommand();
 
             return;
         }

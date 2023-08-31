@@ -11,18 +11,15 @@
 `Compose` 키는 `Ctrl`키 또는 `Command`키입니다.
 
 * `Compose` + `S`: 파일로 저장
-
 * `Compose` + `B`: 토글 볼드
 * `Compose` + `I`: 토글 이탤릭체
 * `Compose` + `U`: 밑줄
-
 * `Compose` + `P`: 테마 변경
-
+* `Compose` + `E`: 이모지 입력
 * `Compose` + `Shift` + `H`: 왼쪽 정렬
 * `Compose` + `Shift` + `J`: 좌우 정렬
 * `Compose` + `Shift` + `K`: 왼쪽 정렬
 * `Compose` + `Shift` + `L`: 왼쪽 정렬
-
 * `Compose` + `Shift` + `S`: 폰트 변경
 
 ## 명령어
@@ -49,3 +46,4 @@
 * `/color` - 테마 변경
 * `/dark` - 테마 어둡게 변경
 * `/light` - 테마 밝게 변경
+* `/emoji` - 이모지 입력
