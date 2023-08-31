@@ -155,7 +155,6 @@ function onload() {
     })
 
     document.addEventListener('keydown', e => {
-        console.log(e);
         let compose = e.metaKey || e.ctrlKey;
 
         // insert tab if tag is pressed
