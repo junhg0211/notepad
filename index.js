@@ -99,7 +99,7 @@ function emojiCommand() {
     // find the emoji string provided
     let lastSpaceIndex = -1;
     for (let i = content.length - 1; i >= 0; i--) {
-        if (content[i] === ' ') {
+        if (content[i] === ' ' || content[i] === '\n' || content[i] === '\t') {
             lastSpaceIndex = i;
             break;
         }
