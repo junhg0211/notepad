@@ -281,15 +281,6 @@ function onload() {
             return;
         }
 
-        // Save as .txt file
-        if (compose && e.code === 'KeyS' && !e.shiftKey) {
-            e.preventDefault();
-
-            saveTextFile();
-
-            return;
-        }
-
         // change color scheme
         if (compose && e.code === 'KeyP') {
             e.preventDefault();

@@ -10,7 +10,6 @@
 
 `Compose` 키는 `Ctrl`키 또는 `Command`키입니다.
 
-* `Compose` + `S`: 파일로 저장
 * `Compose` + `B`: 토글 볼드
 * `Compose` + `I`: 토글 이탤릭체
 * `Compose` + `U`: 밑줄
