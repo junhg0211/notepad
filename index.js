@@ -82,6 +82,20 @@ function saveTextFile() {
     URL.revokeObjectURL(link.href);
 }
 
+function loadTextFile() {
+    const reader = new FileReader();
+    const file = document.createElement('input');
+    file.type = 'file';
+    file.addEventListener('change', () => {
+        reader.readAsText(file.files[0]);
+    });
+    reader.onload = (e) => {
+        setCookie('content', e.target.result);
+        textarea.value = e.target.result;
+    }
+    file.click();
+}
+
 function setColorScheme(scheme) {
     if (!scheme) {
         document.body.classList.remove('dark');
@@ -142,6 +156,7 @@ const commands = [
     {keyword: 'sans', command: () => setFont('sans-serif')},
     {keyword: 'mono', command: () => setFont('monospaced')},
     {keyword: 'save', command: saveTextFile},
+    {keyword: 'load', command: loadTextFile},
     {keyword: 'clear', command: () => textarea.value = ''},
     {keyword: 'dark', command: () => setColorScheme('dark')},
     {keyword: 'light', command: () => setColorScheme('light')},
