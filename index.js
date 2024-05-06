@@ -155,6 +155,15 @@ function updateIsDarkMode() {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+const sounds = [];
+for (let i = 1; i <= 20; i++) {
+  if (i < 10) {
+    i = `0${i}`;
+  }
+
+  sounds.push(new Audio(`./sound/writing - ${i}.wav`));
+}
+
 function onload() {
   // --- color scheme things
   updateIsDarkMode();
@@ -205,6 +214,29 @@ function onload() {
   });
 
   document.addEventListener("keydown", (e) => {
+    // -- play sound
+    while (true) {
+      const soundIndex = parseInt(Math.random() * sounds.length);
+
+      const sound = sounds[soundIndex];
+      if (!(sound.duration > 0 && !sound.paused)) {
+        sound.play();
+        break;
+      }
+
+      let allPlaying = true;
+      for (let i = 0; i < 20; i++) {
+        const s = sounds[soundIndex];
+        if (!(s.duration > 0 && !s.paused)) {
+          allPlaying = false;
+        }
+      }
+      if (allPlaying) {
+        break;
+      }
+    }
+
+    // -- do compose key stuff
     let compose = e.metaKey || e.ctrlKey;
 
     // insert tab if tag is pressed
