@@ -145,6 +145,8 @@ const commands = [
   { keyword: "dark", command: () => setColorScheme("dark") },
   { keyword: "light", command: () => setColorScheme("light") },
   { keyword: "emoji", command: emojiCommand },
+  { keyword: "sound", command: setPlaySound },
+  { keyword: "unsound", command: unsetPlaySound },
 ];
 
 let isDarkMode = false;
@@ -162,6 +164,17 @@ for (let i = 1; i <= 20; i++) {
   }
 
   sounds.push(new Audio(`./sound/writing - ${i}.wav`));
+}
+let playSound = false;
+
+function setPlaySound() {
+  playSound = true;
+  setCookie("sound", "on");
+}
+
+function unsetPlaySound() {
+  playSound = false;
+  setCookie("sound", "off");
 }
 
 function onload() {
@@ -188,6 +201,8 @@ function onload() {
     } else if (key === "font") {
       textarea.classList.remove("sans-serif");
       textarea.classList.add(value);
+    } else if (key === "sound") {
+      playSound = value === "on";
     }
   });
 
@@ -215,7 +230,7 @@ function onload() {
 
   document.addEventListener("keydown", (e) => {
     // -- play sound
-    while (true) {
+    while (playSound) {
       const soundIndex = parseInt(Math.random() * sounds.length);
 
       const sound = sounds[soundIndex];
