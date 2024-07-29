@@ -1,63 +1,64 @@
 html {
-    --dark-background-color: #19191e;
-    --dark-color: #f7f7f9;
+  --dark-background-color: #19191e;
+  --dark-color: #f7f7f9;
 
-    --light-background-color: #f7f7f9;
-    --light-color: #19191e;
+  --light-background-color: #f7f7f9;
+  --light-color: #19191e;
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        --background-color: var(--dark-background-color);
-        --color: var(--dark-color);
-    }
+  body {
+    --background-color: var(--dark-background-color);
+    --color: var(--dark-color);
+  }
 }
 
-@media (prefers-color-scheme: light){
-    body {
-        --background-color: var(--light-background-color);
-        --color: var(--light-color);
-    }
+@media (prefers-color-scheme: light) {
+  body {
+    --background-color: var(--light-background-color);
+    --color: var(--light-color);
+  }
 }
 
 .dark {
-    --background-color: var(--dark-background-color);
-    --color: var(--dark-color);
+  --background-color: var(--dark-background-color);
+  --color: var(--dark-color);
 }
 
 .light {
-    --background-color: var(--light-background-color);
-    --color: var(--light-color);
+  --background-color: var(--light-background-color);
+  --color: var(--light-color);
 }
 
 body {
-    margin: 0;
-    height: 100vh;
-    background-color: var(--background-color);
-    overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  background-color: var(--background-color);
+  overflow: hidden;
 }
 
 textarea {
-    width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
-    margin: 0;
-    border: 0;
-    outline-color: #0000;
-    padding: 1rem;
-    font-size: 192px;
-    resize: none;
-    background-color: var(--background-color);
-    color: var(--color);
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  margin: 0;
+  border: 0;
+  outline-color: #0000;
+  padding: 1rem;
+  font-size: 64px;
+  resize: none;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 .sans-serif {
-    font-family: "Pretendard", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 .serif {
-    font-family: "CMU Serif", "Times New Roman", "Georgia", "Noto Serif", "Noto Serif JP", "Noto Serif KR", serif;
+  font-family: "CMU Serif", "Times New Roman", "Georgia", "Noto Serif",
+    "Noto Serif JP", "Noto Serif KR", serif;
 }
 
 .monospaced {
-    font-family: "Fira Code", "D2Coding", "돋움체", monospace;
+  font-family: "Fira Code", "D2Coding", "돋움체", monospace;
 }
