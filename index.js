@@ -162,6 +162,7 @@ const commands = [
   { keyword: "emoji", command: emojiCommand },
   { keyword: "sound", command: setPlaySound },
   { keyword: "unsound", command: unsetPlaySound },
+  { keyword: "di", command: diacritic}
 ];
 
 let isDarkMode = false;
@@ -190,6 +191,31 @@ function setPlaySound() {
 function unsetPlaySound() {
   playSound = false;
   setCookie("sound", "off");
+}
+
+const DIACRITIC_MAP_JSON = "./latin.json";
+let diacriticMap;
+getJSON(DIACRITIC_MAP_JSON, (err, data) => {
+  if (err !== null) return;
+  diacriticMap = data;
+});
+
+function diacritic() {
+  let content = textarea.value;
+
+  Object.keys(diacriticMap).forEach(k => {
+    if (content.substring(content.length - k.length) === k) {
+      const value = diacriticMap[k];
+      content = content.substring(0, content.length - k.length) + value;
+    }
+
+    if (content.substring(content.length - k.length) === k.toUpperCase()) {
+      const value = diacriticMap[k].toUpperCase();
+      content = content.substring(0, content.length - k.length) + value;
+    }
+  });
+
+  textarea.value = content;
 }
 
 function onload() {
