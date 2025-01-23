@@ -201,21 +201,25 @@ getJSON(DIACRITIC_MAP_JSON, (err, data) => {
 });
 
 function diacritic() {
-  let content = textarea.value;
+  const selectionStart = textarea.selectionStart;
+  let previousContent = textarea.value.substring(0, selectionStart);
+  const nextContent = textarea.value.substring(selectionStart);
 
   Object.keys(diacriticMap).forEach(k => {
-    if (content.substring(content.length - k.length) === k) {
+    if (previousContent.substring(previousContent.length - k.length) === k) {
       const value = diacriticMap[k];
-      content = content.substring(0, content.length - k.length) + value;
+      previousContent = previousContent.substring(0, previousContent.length - k.length) + value;
     }
 
-    if (content.substring(content.length - k.length) === k.toUpperCase()) {
+    if (previousContent.substring(previousContent.length - k.length) === k.toUpperCase()) {
       const value = diacriticMap[k].toUpperCase();
-      content = content.substring(0, content.length - k.length) + value;
+      previousContent = previousContent.substring(0, previousContent.length - k.length) + value;
     }
   });
 
-  textarea.value = content;
+  textarea.value = previousContent + nextContent;
+  textarea.selectionStart = previousContent.length;
+  textarea.selectionEnd = previousContent.length;
 }
 
 function onload() {
@@ -255,9 +259,19 @@ function onload() {
     let compose = e.metaKey || e.ctrlKey;
 
     // check if command is inserted
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
+    if (selectionEnd !== selectionStart) {
+      return;
+    }
+
+    const previousContent = textarea.value.substring(0, selectionStart);
+    const nextContent = textarea.value.substring(selectionEnd);
     commands.forEach((command) => {
-      if (textarea.value.endsWith(`/${command.keyword}`)) {
-        textarea.value = textarea.value.slice(0, -command.keyword.length - 1);
+      if (previousContent.endsWith(`/${command.keyword}`)) {
+        textarea.value = previousContent.slice(0, -command.keyword.length - 1) + nextContent;
+        textarea.selectionStart = selectionStart - command.keyword.length - 1;
+        textarea.selectionEnd = selectionStart - command.keyword.length - 1;
         command.command();
       }
     });
