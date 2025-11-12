@@ -64,6 +64,7 @@ function alignRight() {
 function setFont(font) {
   textarea.classList.remove("sans-serif");
   textarea.classList.remove("serif");
+  textarea.classList.remove("gulim");
   textarea.classList.remove("monospaced");
 
   textarea.classList.add(font);
@@ -154,6 +155,7 @@ const commands = [
   { keyword: "serif", command: () => setFont("serif") },
   { keyword: "sans", command: () => setFont("sans-serif") },
   { keyword: "mono", command: () => setFont("monospaced") },
+  { keyword: "gulim", command: () => setFont("gulim") },
   { keyword: "save", command: saveTextFile },
   { keyword: "load", command: loadTextFile },
   { keyword: "clear", command: () => (textarea.value = "") },
@@ -376,6 +378,8 @@ function onload() {
       if (textarea.classList.contains("sans-serif")) {
         setFont("serif");
       } else if (textarea.classList.contains("serif")) {
+        setFont("gulim");
+      } else if (textarea.classList.contains("gulim")) {
         setFont("monospaced");
       } else {
         setFont("sans-serif");
