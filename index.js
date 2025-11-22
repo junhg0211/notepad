@@ -32,12 +32,24 @@ function setBold() {
 }
 
 function unsetUnderline() {
-  textarea.style.textDecoration = "";
+  textarea.style.textDecoration = textarea.style.textDecoration.replace("underline", "").trim();
   setCookie("underline", textarea.style.textDecoration);
 }
 
 function setUnderline() {
-  textarea.style.textDecoration = "underline";
+  textarea.style.textDecoration += " underline";
+  textarea.style.textDecoration = textarea.style.textDecoration.trim();
+  setCookie("underline", textarea.style.textDecoration);
+}
+
+function setStrikethrough() {
+  textarea.style.textDecoration += " line-through";
+  textarea.style.textDecoration = textarea.style.textDecoration.trim();
+  setCookie("underline", textarea.style.textDecoration);
+}
+
+function unsetStrikethrough() {
+  textarea.style.textDecoration = textarea.style.textDecoration.replace("line-through", "").trim();
   setCookie("underline", textarea.style.textDecoration);
 }
 
@@ -164,7 +176,9 @@ const commands = [
   { keyword: "emoji", command: emojiCommand },
   { keyword: "sound", command: setPlaySound },
   { keyword: "unsound", command: unsetPlaySound },
-  { keyword: "di", command: diacritic}
+  { keyword: "di", command: diacritic },
+  { keyword: "strikethrough", command: setStrikethrough },
+  { keyword: "unstrikethrough", command: unsetStrikethrough },
 ];
 
 let isDarkMode = false;
@@ -371,8 +385,21 @@ function onload() {
       return;
     }
 
-    // change font family
+    // toggle strikethough
     if (compose && e.code === "KeyS" && e.shiftKey) {
+      e.preventDefault();
+
+      if (textarea.style.textDecoration.indexOf("line-through") !== -1) {
+        unsetStrikethrough();
+      } else {
+        setStrikethrough();
+      }
+
+      return;
+    }
+
+    // change font family
+    if (compose && e.code === "KeyF" && e.shiftKey) {
       e.preventDefault();
 
       if (textarea.classList.contains("sans-serif")) {
