@@ -354,7 +354,7 @@ function onload() {
     if (compose && e.code === "KeyU") {
       e.preventDefault();
 
-      if (textarea.style.textDecoration) unsetUnderline();
+      if (textarea.style.textDecoration.indexOf("underline") !== -1) unsetUnderline();
       else setUnderline();
 
       return;
