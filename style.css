@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nanum+Myeongjo&display=swap');
+
 html {
   --dark-background-color: #19191e;
   --dark-color: #f7f7f9;
@@ -55,7 +57,7 @@ textarea {
 }
 
 .serif {
-  font-family: "CMU Serif", "Times New Roman", "Georgia", "Noto Serif", "Noto Serif JP", "Noto Serif KR", serif;
+  font-family: "EB Garamond", "Nanum Myeongjo", "CMU Serif", "Times New Roman", "Georgia", "Noto Serif", "Noto Serif JP", "Noto Serif KR", serif;
 }
 
 .monospaced {
